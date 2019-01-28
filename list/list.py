@@ -14,6 +14,10 @@ class List(object):
         return head
 
     def print(self):
+        # empty list
+        if self._value is None:
+            return
+
         print(self._value)
         if self._next is not None:
             self._next.print()
@@ -50,6 +54,10 @@ class List(object):
         return cur._value
 
     def print_reversed(self):
+        # empty list
+        if self._value is None:
+            return
+
         if self._next is not None:
             self._next.print_reversed()
         print(self._value)
