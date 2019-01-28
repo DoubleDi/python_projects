@@ -1,9 +1,8 @@
 import asyncio
 import aiohttp
+from base64 import b64encode
 from collections import namedtuple
 import logging
-import sys
-from base64 import b64encode
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s]: %(message)s')
 logger = logging.getLogger()
