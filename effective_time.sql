@@ -61,7 +61,6 @@ insert into posts_stats_new (post_id, views, likes, shares, effective_from, effe
             group by post_id
         )
     )
-    order by post_id, effective_from
 );
 
 drop table posts_stats;
