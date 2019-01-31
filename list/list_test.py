@@ -91,3 +91,10 @@ class TestList(unittest.TestCase):
                 l = copy.deepcopy(self.cases[i])
                 l.append(7)
                 self.assertEqual(l._last()._value, correct[i]._last()._value)
+
+    def test_exceptions(self):
+        with self.assertRaises(TypeError):
+            l = List(1)
+            l += 1
+        with self.assertRaises(TypeError):
+            l = List(1, next_=1)

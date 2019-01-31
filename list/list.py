@@ -4,6 +4,9 @@ class List(object):
 
     def __init__(self, value=None, next_=None):
         self._value = value
+
+        if not (isinstance(next_, List) or next_ is None):
+            raise TypeError("next_ value must be type List or None, but not {}".format(type(next_)))
         self._next = next_
 
     def _last(self):
@@ -29,11 +32,14 @@ class List(object):
             head._next = List(value=v)
             head = head._next
 
-    def __add__(self, obj):
-        if type(obj) == list:
+    def __iadd__(self, obj):
+        if not isinstance(obj, (list, List)):
+            raise TypeError("obj must be type List or list but not {}".format(type(obj)))
+
+        if isinstance(obj, list):
             last = None
-            while len(obj):
-                cur = List(value=obj.pop(), next_=last)
+            for o in reversed(obj):
+                cur = List(value=o, next_=last)
                 last = cur
             obj = last
 
@@ -41,6 +47,10 @@ class List(object):
         head._next = copy.deepcopy(obj)
 
         return self
+
+    def __add__(self, obj):
+        new = copy.deepcopy(self)
+        return new.__iadd__(obj)
 
     def __iter__(self):
         self._cur = self
@@ -50,6 +60,7 @@ class List(object):
         cur = self._cur
         if cur is None:
             raise StopIteration
+
         self._cur = self._cur._next
         return cur._value
 
