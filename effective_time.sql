@@ -42,6 +42,8 @@ create table if not exists posts_stats_new (
     PRIMARY KEY (post_id, effective_from, effective_to)
 );
 
+-- old
+/*
 insert into posts_stats_new (post_id, views, likes, shares, effective_from, effective_to) (
     with e_times as (
         select min(dttm) as effective_from, max(dttm) as e_to, post_id, views, likes, shares
@@ -61,6 +63,17 @@ insert into posts_stats_new (post_id, views, likes, shares, effective_from, effe
             group by post_id
         )
     )
+);
+*/
+
+-- new
+insert into posts_stats_new (post_id, views, likes, shares, effective_from, effective_to) (
+    select t1.post_id, t1.views, t1.likes, t1.shares, min(t1.dttm) as effective_from,
+        coalesce(min(t2.dttm), '9999-12-31 23:59:59') as effective_to
+    from posts_stats t1 left join posts_stats t2 on
+        t1.post_id = t2.post_id and t1.dttm < t2.dttm and
+        (t1.views != t2.views or t1.likes != t2.likes or t1.shares != t2.shares)
+    group by t1.post_id, t1.views, t1.likes, t1.shares
 );
 
 drop table posts_stats;
