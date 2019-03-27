@@ -1,0 +1,38 @@
+- job:
+    timeout: 10
+    rows_per_iter: 2
+
+    from:
+        host: 127.0.0.1
+        port: 3357
+        user: root
+        password:
+        database: test
+        table: t8
+
+    to:
+        host: 127.0.0.1
+        port: 3357
+        user: root
+        password:
+        database: test
+        table: t7
+- job:
+    timeout: 10
+    rows_per_iter: 2
+
+    from:
+        host: 127.0.0.1
+        port: 3357
+        user: root
+        password:
+        database: test
+        table: t8
+
+    to:
+        host: 127.0.0.1
+        port: 3357
+        user: root
+        password:
+        database: test
+        table: t7
