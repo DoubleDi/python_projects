@@ -1,0 +1,1 @@
+* * * * * root python /src/test/main.py >> /var/log/tasks/test.log 2>&1

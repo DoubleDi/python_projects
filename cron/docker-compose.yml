@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  web:
+    build: .
+    image: python_cron
+    container_name: python_cron
+    restart: on-failure
+    volumes:
+        - ./src:/src
+        - ./logs:/var/log/tasks
+    stdin_open: true
+    tty: true
