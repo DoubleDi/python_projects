@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+  mongo:
+    restart: unless-stopped
+    image: mongo:latest
+    volumes:
+      - ./mongo_data:/data/db
+    ports:
+      - 27017:27017
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    volumes:
+      - ./redis_data:/data
+    ports:
+      - 6379:6379
